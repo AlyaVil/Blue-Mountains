@@ -52,4 +52,49 @@ void keyPressed()  //save the framme when we press the letter s
 
 
 
+void fade(color fadeColor)
+{
+  for(int i = 0; i < height/3; i++) 
+  {
+    float alfa = map(i, 0, height/3, 360, 0);
+    
+    strokeWeight(1);
+    stroke(fadeColor, alfa);
+    line(0, i, width, i);
+  }
+}
+
+
+/*------------------------------------*/
+
+
+void clouds(color cloudColor)
+{  
+  float begin = random(50); //changes the begin of noise each time
+  
+  float i = 0; 
+  
+  for(int x = 0; x < width; x += 2)
+  {    
+    float j = 0; 
+    
+    for(int y = 0; y < height/3; y += 2)
+    {     
+      float alfaMax = map(y, 0, height/4, 520, 0);  //the clouds become transparent as they become near to the mountains   
+      float alfa = noise(begin + i, begin + j);
+      alfa = map(alfa, 0.4, 1, 0, alfaMax);
+      
+      noStroke();    
+      fill(cloudColor, alfa);
+      ellipse(x, y, 2, 2);
+      
+      j += 0.06; //increase j faster than i so the clouds look horizontal
+    }
+    
+    i += 0.01;
+  }
+}
+
+
+/*------------------------------------*/
 
